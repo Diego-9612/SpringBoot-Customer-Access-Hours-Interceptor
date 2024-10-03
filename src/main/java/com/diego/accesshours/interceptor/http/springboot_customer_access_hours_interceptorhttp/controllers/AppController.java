@@ -10,15 +10,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 @RestController
 @RequestMapping("/app")
 public class AppController {
 
     @GetMapping("/inter")
-    public ResponseEntity<?> interceptor(){
+    public ResponseEntity<?> interceptor(HttpServletRequest request){
         Map<String, Object> data = new HashMap<>();
         data.put("Title", "Bienvenidos al sistema de atencion");
         data.put("Time", new Date());
+        data.put("Message", request.getAttribute("message"));
         return ResponseEntity.ok(data);
     }
 
